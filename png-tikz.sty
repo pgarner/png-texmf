@@ -1,0 +1,65 @@
+%
+% Tikz macros for SSP
+%
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\tikzstyle{c} = [circle,draw=black,minimum size=5ex]
+\tikzstyle{r} = [rectangle,draw=black,minimum size=5ex]
+\tikzstyle{o} = [circle,draw=black,fill=black,inner sep=0.3ex]
+\tikzstyle{f} = [circle,draw=black,minimum size=5ex,fill=lightgray]
+\tikzstyle{d} = [inner sep=0ex]
+\tikzstyle{l} = [-]
+\tikzstyle{a} = [->,>=stealth']
+
+% This defines a background that looks like a notebook
+\usetikzlibrary{backgrounds}
+\tikzset{background grid/.style={very thin,draw=cyan!30,step=0.5cm}}
+
+\newcommand{\pole}[1]{
+  \draw[red] (#1)
+  +(-0.05,0.05) -- +(0.05,-0.05)
+  +(-0.05,-0.05) -- +(0.05,0.05);
+}
+
+\newcommand{\zero}[1]{
+  \draw[red] (#1) circle (0.05);
+  +(-0.05,0.05) -- +(0.05,-0.05)
+  +(-0.05,-0.05) -- +(0.05,0.05);
+}
+
+\newcommand{\xtic}[2]{
+  \draw (#1,0) -- +(0,-0.05) node[below] {#2};
+}
+
+\newcommand{\xtoc}[2]{
+  \draw (#1,0) -- +(0,0.05) node[above] {#2};
+}
+
+\newcommand{\ytic}[2]{
+  \draw (0,#1) -- +(-0.05,0) node[left] {#2};
+}
+
+\newcommand{\zplane}{
+  \draw[step=.5,lightgray,very thin] (-1.95,-1.95) grid (1.95,1.95);
+  \draw[->] (-1.95,0) -- (1.95,0) node[below] {\small$\Re$};
+  \draw[->] (0,-1.95) -- (0,1.95) node[left]  {\small$\Im$};
+  \draw (0,0) circle (1);
+}
+
+\newcommand{\splane}{
+  \draw[step=.25,lightgray,very thin] (-1.24,-1.24) grid (1.24,1.24);
+  \draw[->] (-1.5,0) -- (1.5,0) node[below] {\tiny$\sigma$};
+  \draw[->] (0,-1.5) -- (0,1.5) node[left]  {\tiny$\omega$};
+}
+
+\newcommand{\tplane}{
+  \draw[step=.25,lightgray,very thin] (-1.24,-1.24) grid (1.24,1.24);
+  \draw[->] (-1.5,0) -- (1.5,0) node[below] {\small$t$};
+  \draw[->] (0,-1.5) -- (0,1.5) node[left]  {};
+}
+
+\newcommand{\tplanepositive}{
+  \draw[step=.25,lightgray,very thin] (-0.24,-0.24) grid (1.24,1.24);
+  \draw[->] (-0.5,0) -- (1.5,0) node[below] {\small$t$};
+  \draw[->] (0,-0.5) -- (0,1.5) node[left]  {};
+}
