@@ -15,8 +15,6 @@ bibtex2html $opts -t "Philip N. Garner: Patents and published applications" \
             png-pats.bib
 bibtex2html $opts -t "Philip N. Garner: Technical reports" \
             png-tech.bib
-bibtex2html $opts -t "Philip N. Garner: In preparation" \
-            png-prep.bib
 
 echo Copying to $html
 cp *.html $html
