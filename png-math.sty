@@ -44,13 +44,14 @@
 \newcommand{\Normal}[3]{\mathcal{N}\left(#1;#2,#3\right)}
 \newcommand{\CNormal}[3]{\mathfrak{N}\left(#1;#2,#3\right)}
 \newcommand{\IGamma}[3]{G^{-1}\left(#1;#2,#3\right)}
-\def\CondPr#1#2{P\left(#1\mid#2\right)}
+\def\CondPr#1#2{\mathbb{P}\left(#1\mid#2\right)}
 \def\CondLi#1#2{p\left(#1\mid#2\right)}
 \def\CondEx#1#2{\mathbb{E}\left(#1\mid#2\right)}
-\def\Pr#1{P\left(#1\right)}
+\def\Pr#1{\mathbb{P}\left(#1\right)}
 \def\Li#1{p\left(#1\right)}
 \def\Ex#1{\mathbb{E}\left(#1\right)}
-\def\Va#1{\Ex{{#1}^2}-\Ex{#1}^2}
+%\def\Va#1{\Ex{{#1}^2}-\Ex{#1}^2}
+\def\Va#1{\text{Var}\left(#1\right)}
 \def\CondLR#1#2{L\left(#1\mid#2\right)}
 \def\LR#1{L\left(#1\right)}
 
