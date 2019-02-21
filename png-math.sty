@@ -1,17 +1,20 @@
 %%
 %% General notation
 %%
-%% Vectors are bold in TeX, underlined in patents
-%% Complex numbers are fraktur
-%%
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Vectors are bold in TeX, underlined in patents
+% Complex numbers are fraktur (may not be a good idea)
 \renewcommand{\Vec}[1]{\boldsymbol{#1}}
 \newcommand{\Com}[1]{\mathfrak{#1}}
-\newcommand{\Max}[1]{\max\left[#1\right]}
-\newcommand{\Min}[1]{\min\left[#1\right]}
+\newcommand{\Max}[1]{\max\left(#1\right)}
+\newcommand{\Min}[1]{\min\left(#1\right)}
 \newcommand{\Exp}[1]{\exp\left(#1\right)}
 \newcommand{\Abs}[1]{\lvert#1\rvert}
 \newcommand{\Norm}[1]{\lVert#1\rVert}
 
+% Operators
 \DeclareMathOperator{\Ei}{Ei}
 \DeclareMathOperator*{\argmax}{argmax}
 \DeclareMathOperator{\erf}{erf}
@@ -22,38 +25,41 @@
 \newcommand{\T}{\mathsf{T}}
 \newcommand{\I}{\boldsymbol{I}}
 
-% General variables to use for general cases
-\def\scalar{x}
-\def\nScalar{X}
-\def\complex{\Com{\scalar}}
-\def\Scalar{\Vec{\scalar}}
-\def\SCALAR{\Vec{X}}
-\def\Complex{\Vec{\complex}}
-\def\auxscalar{y}
-\def\auxcomplex{\Com{\auxscalar}}
-\def\auxScalar{\Vec{\auxscalar}}
-\def\auxComplex{\Vec{\auxcomplex}}
-\def\mean{\mu}
-\def\Mean{\Vec{\mean}}
-\def\stddev{\sigma}
-\def\variance{\upsilon}
-\def\Variance{\Vec{\variance}}
-\def\Covariance{\Vec{\Sigma}}
-
 % Probability
+\renewcommand{\Pr}[2][]{\mathbb{P}_{#1}\left(#2\right)}
+\newcommand{\PD}[2][]{f_{#1}\left(#2\right)}
+\newcommand{\Ex}[2][]{\mathbb{E}_{#1}\left(#2\right)}
+\newcommand{\CondPr}[3][]{\Pr[#1]{#2\mid#3}}
+\newcommand{\CondPD}[3][]{\PD[#1]{#2\mid#3}}
+\newcommand{\CondEx}[3][]{\Ex[#1]{#2\mid#3}}
+\newcommand{\Va}[1]{\text{Var}\left(#1\right)}
+
+% Distributions
 \newcommand{\Normal}[3]{\mathcal{N}\left(#1;#2,#3\right)}
 \newcommand{\CNormal}[3]{\mathfrak{N}\left(#1;#2,#3\right)}
 \newcommand{\IGamma}[3]{G^{-1}\left(#1;#2,#3\right)}
-\def\CondPr#1#2{\mathbb{P}\left(#1\mid#2\right)}
-\def\CondLi#1#2{p\left(#1\mid#2\right)}
-\def\CondEx#1#2{\mathbb{E}\left(#1\mid#2\right)}
-\def\Pr#1{\mathbb{P}\left(#1\right)}
-\def\Li#1{p\left(#1\right)}
-\def\Ex#1{\mathbb{E}\left(#1\right)}
-%\def\Va#1{\Ex{{#1}^2}-\Ex{#1}^2}
-\def\Va#1{\text{Var}\left(#1\right)}
-\def\CondLR#1#2{L\left(#1\mid#2\right)}
-\def\LR#1{L\left(#1\right)}
+
+% General variables to use for general cases
+\newcommand{\mean}{\mu}
+\newcommand{\Mean}{\Vec{\mean}}
+\newcommand{\stddev}{\sigma}
+\newcommand{\variance}{\upsilon}
+\newcommand{\Variance}{\Vec{\variance}}
+\newcommand{\Covariance}{\Vec{\Sigma}}
+
+% \def\scalar{x}
+% \def\nScalar{X}
+% \def\complex{\Com{\scalar}}
+% \def\Scalar{\Vec{\scalar}}
+% \def\SCALAR{\Vec{X}}
+% \def\Complex{\Vec{\complex}}
+% \def\auxscalar{y}
+% \def\auxcomplex{\Com{\auxscalar}}
+% \def\auxScalar{\Vec{\auxscalar}}
+% \def\auxComplex{\Vec{\auxcomplex}}
+% \def\Va#1{\Ex{{#1}^2}-\Ex{#1}^2}
+% \def\CondLR#1#2{L\left(#1\mid#2\right)}
+% \def\LR#1{L\left(#1\right)}
 
 
 %%% Local Variables: 
