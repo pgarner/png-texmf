@@ -1,4 +1,12 @@
 %%
+%% Various macros for setting maths
+%%
+%% Phil Garner
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{png-math}[2020/02/19 PNG's maths conventions]
+
+%%
 %% General notation
 %%
 \usepackage{amsmath}
@@ -17,6 +25,7 @@
 % Operators
 \DeclareMathOperator{\Ei}{Ei}
 \DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator{\erf}{erf}
 \DeclareMathOperator{\logit}{logit}
 \DeclareMathOperator{\odds}{odds}
@@ -26,13 +35,15 @@
 \newcommand{\I}{\boldsymbol{I}}
 
 % Probability
-\renewcommand{\Pr}[2][]{\mathbb{P}_{#1}\left(#2\right)}
-\newcommand{\PD}[2][]{f_{#1}\left(#2\right)}
+\renewcommand{\Pr}[2][]{P_{#1}\left(#2\right)}
+\newcommand{\PD}[2][]{p_{#1}\left(#2\right)}
+\newcommand{\PR}[2][]{\mathbb{P}_{#1}\left(#2\right)}
 \newcommand{\Ex}[2][]{\mathbb{E}_{#1}\left(#2\right)}
 \newcommand{\CondPr}[3][]{\Pr[#1]{#2\mid#3}}
 \newcommand{\CondPD}[3][]{\PD[#1]{#2\mid#3}}
+\newcommand{\CondPR}[3][]{\PR[#1]{#2\mid#3}}
 \newcommand{\CondEx}[3][]{\Ex[#1]{#2\mid#3}}
-\newcommand{\Va}[1]{\text{Var}\left(#1\right)}
+% \newcommand{\Va}[1]{\text{Var}\left(#1\right)}
 
 % Distributions
 \newcommand{\Normal}[3]{\mathcal{N}\left(#1;#2,#3\right)}
@@ -46,6 +57,13 @@
 \newcommand{\variance}{\upsilon}
 \newcommand{\Variance}{\Vec{\variance}}
 \newcommand{\Covariance}{\Vec{\Sigma}}
+
+% Option "stats" changes to some statistics vs. signal processing conventions
+\DeclareOption{stats}{
+  \renewcommand{\Pr}[2][]{f_{#1}\left(#2\right)}
+  \renewcommand{\PD}[2][]{f_{#1}\left(#2\right)}
+}
+\ProcessOptions\relax
 
 % \def\scalar{x}
 % \def\nScalar{X}
