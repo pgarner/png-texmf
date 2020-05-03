@@ -43,6 +43,8 @@
 \newcommand{\CondPD}[3][]{\PD[#1]{#2\mid#3}}
 \newcommand{\CondPR}[3][]{\PR[#1]{#2\mid#3}}
 \newcommand{\CondEx}[3][]{\Ex[#1]{#2\mid#3}}
+\newcommand{\Li}[1]{\mathcal{L}(#1)}
+\newcommand{\Lo}[1]{L(#1)}
 
 % Information theory
 \newcommand{\En}[1]{\mathbb{H}\left(#1\right)}
@@ -53,6 +55,10 @@
 \newcommand{\IGamma}[3]{G^{-1}\left(#1;#2,#3\right)}
 
 % General variables to use for general cases
+\newcommand{\data}{x}
+\newcommand{\Data}{\Vec{\data}}
+\newcommand{\param}{\theta}
+\newcommand{\Param}{\Vec{\param}}
 \newcommand{\mean}{\mu}
 \newcommand{\Mean}{\Vec{\mean}}
 \newcommand{\stddev}{\sigma}
@@ -64,6 +70,8 @@
 \DeclareOption{stats}{
   \renewcommand{\Pr}[2][]{f_{#1}\left(#2\right)}
   \renewcommand{\PD}[2][]{f_{#1}\left(#2\right)}
+  \renewcommand{\Li}[1]{L(#1)}
+  \renewcommand{\Lo}[1]{\mathcal{L}(#1)}
 }
 \ProcessOptions\relax
 
