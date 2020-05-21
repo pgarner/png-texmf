@@ -1,0 +1,32 @@
+%%
+%% Bibliography handler using biblatex
+%%
+%% Phil Garner
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{png-bibs}[2020/05/21 PNG's bibliography]
+
+% Make the biblio look like natbib
+\usepackage[%
+  backend=bibtex,
+  natbib,
+  style=authoryear,
+  dashed=false,        % Consecutive items with same authors repeat authors
+  labeldateparts=false % Remove the month from parenthesised date
+  ]{biblatex}
+
+% Add space between entries
+\setlength{\bibitemsep}{\parsep}
+\let\cite\citet
+
+% All my bib resources
+\addbibresource{png-strs}
+\addbibresource{png-pubs}
+\addbibresource{png-refs}
+\addbibresource{png-tech}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
