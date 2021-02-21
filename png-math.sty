@@ -47,6 +47,7 @@
 \newcommand{\Li}[1]{\mathcal{L}(#1)}
 \newcommand{\Lo}[1]{L(#1)}
 \newcommand{\Va}[1]{\operatorname{Var}(#1)}
+\newcommand{\Mo}[1]{\operatorname{Mode}(#1)}
 
 % Information theory
 \newcommand{\En}[1]{\mathbb{H}\left(#1\right)}
@@ -77,8 +78,8 @@
 
 % Option "stats" changes to some statistics vs. signal processing conventions
 \DeclareOption{stats}{
-  \renewcommand{\Pr}[2][]{f_{#1}\left(#2\right)}
-  \renewcommand{\PD}[2][]{f_{#1}\left(#2\right)}
+  \renewcommand{\Pr}[2][]{f_{#1}(#2)}
+  \renewcommand{\PD}[2][]{f_{#1}(#2)}
   \renewcommand{\Li}[1]{L(#1)}
   \renewcommand{\Lo}[1]{\mathcal{L}(#1)}
 }
