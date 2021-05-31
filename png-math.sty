@@ -36,10 +36,12 @@
 \newcommand{\I}{\boldsymbol{I}}
 
 % Probability
-\renewcommand{\Pr}[2][]{P_{#1}(#2)}
-\newcommand{\PD}[2][]{p_{#1}(#2)}
+\newcommand{\roundp}[1]{\mathopen{}\left(#1\right)\mathclose{}}
+\newcommand{\squarep}[1]{\mathopen{}\left[#1\right]\mathclose{}}
+\renewcommand{\Pr}[2][]{P_{#1}\roundp{#2}}
+\newcommand{\PD}[2][]{p_{#1}\roundp{#2}}
 \newcommand{\PR}[2][]{\mathbb{P}_{#1}(#2)}
-\newcommand{\Ex}[2][]{\mathbb{E}_{#1}[#2]}
+\newcommand{\Ex}[2][]{\mathbb{E}_{#1}\squarep{#2}}
 \newcommand{\CondPr}[3][]{\Pr[#1]{#2\mid#3}}
 \newcommand{\CondPD}[3][]{\PD[#1]{#2\mid#3}}
 \newcommand{\CondPR}[3][]{\PR[#1]{#2\mid#3}}
@@ -78,8 +80,8 @@
 
 % Option "stats" changes to some statistics vs. signal processing conventions
 \DeclareOption{stats}{
-  \renewcommand{\Pr}[2][]{f_{#1}(#2)}
-  \renewcommand{\PD}[2][]{f_{#1}(#2)}
+  \renewcommand{\Pr}[2][]{f_{#1}\roundp{#2}}
+  \renewcommand{\PD}[2][]{f_{#1}\roundp{#2}}
   \renewcommand{\Li}[1]{L(#1)}
   \renewcommand{\Lo}[1]{\mathcal{L}(#1)}
 }
