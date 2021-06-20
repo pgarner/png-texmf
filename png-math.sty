@@ -35,25 +35,33 @@
 \newcommand{\T}{\mathsf{T}}
 \newcommand{\I}{\boldsymbol{I}}
 
-% Probability
+% Big brackets with proper math function spacing
 \newcommand{\roundp}[1]{\mathopen{}\left(#1\right)\mathclose{}}
 \newcommand{\squarep}[1]{\mathopen{}\left[#1\right]\mathclose{}}
-\renewcommand{\Pr}[2][]{P_{#1}\roundp{#2}}
-\newcommand{\PD}[2][]{p_{#1}\roundp{#2}}
-\newcommand{\PR}[2][]{\mathbb{P}_{#1}(#2)}
+
+% Probability
+% Unconditional - uses the big brackets
+\newcommand{\pmf}{P}
+\newcommand{\pdf}{p}
+\renewcommand{\Pr}[2][]{\pmf_{#1}\roundp{#2}}
+\newcommand{\PD}[2][]{\pdf_{#1}\roundp{#2}}
+\newcommand{\PR}[2][]{\mathbb{P}_{#1}\roundp{#2}}
 \newcommand{\Ex}[2][]{\mathbb{E}_{#1}\squarep{#2}}
-\newcommand{\CondPr}[3][]{\Pr[#1]{#2\mid#3}}
-\newcommand{\CondPD}[3][]{\PD[#1]{#2\mid#3}}
-\newcommand{\CondPR}[3][]{\PR[#1]{#2\mid#3}}
-\newcommand{\CondEx}[3][]{\Ex[#1]{#2\mid#3}}
+
+% Conditional - don't use the big brackets to match the conditional
+\newcommand{\CondPr}[3][]{\pmf_{#1}(#2\mid#3)}
+\newcommand{\CondPD}[3][]{\pdf_{#1}(#2\mid#3)}
+\newcommand{\CondPR}[3][]{\mathbb{P}_{#1}(#2\mid#3)}
+\newcommand{\CondEx}[3][]{\mathbb{E}_{#1}[#2\mid#3]}
+
 \newcommand{\Li}[1]{\mathcal{L}(#1)}
 \newcommand{\Lo}[1]{L(#1)}
 \newcommand{\Va}[1]{\operatorname{Var}[#1]}
 \newcommand{\Mo}[1]{\operatorname{Mode}[#1]}
 
 % Information theory
-\newcommand{\En}[1]{\mathbb{H}\left(#1\right)}
-\newcommand{\MI}[1]{\mathbb{I}\left(#1\right)}
+\newcommand{\En}[1]{\mathbb{H}\roundp{#1}}
+\newcommand{\MI}[1]{\mathbb{I}\roundp{#1}}
 
 % Distributions
 \newcommand{\Normal}[3]{\mathcal{N}\left(#1;#2,#3\right)}
@@ -80,8 +88,10 @@
 
 % Option "stats" changes to some statistics vs. signal processing conventions
 \DeclareOption{stats}{
-  \renewcommand{\Pr}[2][]{f_{#1}\roundp{#2}}
-  \renewcommand{\PD}[2][]{f_{#1}\roundp{#2}}
+  \renewcommand{\pmf}{f}
+  \renewcommand{\pdf}{f}
+%  \renewcommand{\Pr}[2][]{f_{#1}\roundp{#2}}
+%  \renewcommand{\PD}[2][]{f_{#1}\roundp{#2}}
   \renewcommand{\Li}[1]{L(#1)}
   \renewcommand{\Lo}[1]{\mathcal{L}(#1)}
 }
