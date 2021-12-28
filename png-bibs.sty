@@ -21,17 +21,15 @@
     url=false        % Suppress an extra URL as DOI and arXiv are links
   ]{biblatex}
 \else
-  % Make the biblio look like natbib's author-year style
+  % Similar to natbib's author-year, and better than biblatex's default
   \RequirePackage[%
-    style=authoryear,
+    style=iso-authoryear,
     natbib,
     backend=bibtex,
-    dashed=false,    % Consecutive items with same authors repeat authors
-    mergedate=false  % Remove the month from parenthesised date
     ]{biblatex}
 
-  % Add space between entries
-  \setlength{\bibitemsep}{\parsep}
+  % Stop the family names converting to upper case (so, perhaps not ISO)
+  \let\familynameformat=\relax
 \fi
 
 \if@citet
