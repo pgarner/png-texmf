@@ -17,7 +17,6 @@
   \RequirePackage[%
     style=ieee,
     natbib,
-    backend=bibtex,
     url=false        % Suppress an extra URL as DOI and arXiv are links
   ]{biblatex}
 \else
@@ -25,7 +24,6 @@
   \RequirePackage[%
     style=iso-authoryear,
     natbib,
-    backend=bibtex,
     ]{biblatex}
 
   % Stop the family names converting to upper case (so, perhaps not ISO)
@@ -36,11 +34,11 @@
   \let\cite\textcite
 \fi
 
-% All my bib resources
-\addbibresource{png-strs}
-\addbibresource{png-pubs}
-\addbibresource{png-refs}
-\addbibresource{png-tech}
+% All my bib resources (biber requires the .bib extension)
+\addbibresource{png-strs.bib}
+\addbibresource{png-pubs.bib}
+\addbibresource{png-refs.bib}
+\addbibresource{png-tech.bib}
 
 
 %%% Local Variables:
