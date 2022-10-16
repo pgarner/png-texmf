@@ -12,13 +12,17 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
+% Big brackets with proper math function spacing
+\newcommand{\roundp}[1]{\mathopen{}\left(#1\right)\mathclose{}}
+\newcommand{\squarep}[1]{\mathopen{}\left[#1\right]\mathclose{}}
+
 % Vectors are bold in TeX, underlined in patents
 % Complex numbers are fraktur (may not be a good idea)
 \renewcommand{\Vec}[1]{\boldsymbol{#1}}
 \newcommand{\Com}[1]{\mathfrak{#1}}
-\newcommand{\Max}[1]{\max\left(#1\right)}
-\newcommand{\Min}[1]{\min\left(#1\right)}
-\newcommand{\Exp}[1]{\exp\left(#1\right)}
+\newcommand{\Max}[1]{\max\roundp{#1}}
+\newcommand{\Min}[1]{\min\roundp{#1}}
+\newcommand{\Exp}[1]{\exp\roundp{#1}}
 \newcommand{\Abs}[1]{\lvert#1\rvert}
 \newcommand{\Norm}[1]{\lVert#1\rVert}
 \newcommand{\Floor}[1]{\lfloor#1\rfloor}
@@ -34,10 +38,6 @@
 % Transpose, identity
 \newcommand{\T}{\mathsf{T}}
 \newcommand{\I}{\boldsymbol{I}}
-
-% Big brackets with proper math function spacing
-\newcommand{\roundp}[1]{\mathopen{}\left(#1\right)\mathclose{}}
-\newcommand{\squarep}[1]{\mathopen{}\left[#1\right]\mathclose{}}
 
 % Probability
 % Unconditional - uses the big brackets
@@ -65,9 +65,9 @@
 \newcommand{\KL}[2]{D_\text{KL}[#1||#2]}
 
 % Distributions
-\newcommand{\Normal}[3]{\mathcal{N}\left(#1;#2,#3\right)}
-\newcommand{\CNormal}[3]{\mathfrak{N}\left(#1;#2,#3\right)}
-\newcommand{\IGamma}[3]{G^{-1}\left(#1;#2,#3\right)}
+\newcommand{\Normal}[3]{\mathcal{N}\roundp{#1;#2,#3}}
+\newcommand{\CNormal}[3]{\mathfrak{N}\roundp{#1;#2,#3}}
+\newcommand{\IGamma}[3]{G^{-1}\roundp{#1;#2,#3}}
 
 % General variables to use for general cases
 \newcommand{\data}{x}
@@ -84,16 +84,16 @@
 \newcommand{\Mean}{\Vec{\mean}}
 \newcommand{\vMean}{\Vec{\mean}}
 \newcommand{\stddev}{\sigma}
+\newcommand{\vStddev}{\Vec{\sigma}}
 \newcommand{\variance}{\upsilon}
-\newcommand{\Variance}{\Vec{\variance}}
-\newcommand{\Covariance}{\Vec{\Sigma}}
+\newcommand{\vVariance}{\Vec{\variance}}
+\newcommand{\mVariance}{\Vec{\Sigma}}
+\newcommand{\mHessian}{\Vec{H}}
 
 % Option "stats" changes to some statistics vs. signal processing conventions
 \DeclareOption{stats}{
   \renewcommand{\pmf}{f}
   \renewcommand{\pdf}{f}
-%  \renewcommand{\Pr}[2][]{f_{#1}\roundp{#2}}
-%  \renewcommand{\PD}[2][]{f_{#1}\roundp{#2}}
   \renewcommand{\Li}[1]{L(#1)}
   \renewcommand{\Lo}[1]{\mathcal{L}(#1)}
 }
