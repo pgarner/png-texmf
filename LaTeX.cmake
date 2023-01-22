@@ -7,33 +7,22 @@
 #   Phil Garner, January 2023
 #
 
-# Ref: https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#how-do-i-use-cmake-to-build-latex-documents
+# Refs:
+# https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#how-do-i-use-cmake-to-build-latex-documents
+# http://www.luatex.org/roadmap.html#tbp
 
-find_package(LATEX COMPONENTS PDFLATEX LUALATEX BIBER)
+find_package(LATEX COMPONENTS XELATEX PDFLATEX LUALATEX BIBER)
 
-function(add_lualatex_command BASENAME AUX)
+function(add_latex_command BASENAME AUX)
   message(STATUS "Adding ${BASENAME}")
   add_custom_command(
     OUTPUT    ${BASENAME}.log ${BASENAME}.aux ${BASENAME}.bcf ${BASENAME}._
-    COMMAND   ${LUALATEX_COMPILER}
+    COMMAND   ${COMPILER_CMD}
     ARGS      -shell-escape -interaction=batchmode
               "${CMAKE_CURRENT_SOURCE_DIR}/${BASENAME}"
     BYPRODUCTS texput.log ${AUX} ${BASENAME}.out ${BASENAME}.toc
                ${BASENAME}.run.xml
-    COMMENT   "LuaLaTeX ${BASENAME}"
-    )
-endfunction()
-
-function(add_pdflatex_command BASENAME AUX)
-  message(STATUS "Adding ${BASENAME}")
-  add_custom_command(
-    OUTPUT    ${BASENAME}.log ${BASENAME}.aux ${BASENAME}.bcf ${BASENAME}._
-    COMMAND   ${PDFLATEX_COMPILER}
-    ARGS      -shell-escape -interaction=batchmode
-              "${CMAKE_CURRENT_SOURCE_DIR}/${BASENAME}"
-    BYPRODUCTS texput.log ${AUX} ${BASENAME}.out ${BASENAME}.toc
-               ${BASENAME}.run.xml
-    COMMENT   "PDFLaTeX ${BASENAME}"
+    COMMENT   "${COMPILER_STR} ${BASENAME}"
     )
 endfunction()
 
@@ -72,13 +61,19 @@ function(add_document BASENAME)
     set(aux "${BASENAME}.aux")
   endif()
 
-  # This is the main LaTeX command, but without a target.  Default to lualatex,
-  # with a fallback to pdflatex if requested
+  # This is the main LaTeX command, but without a target.  Default to xelatex,
+  # with fallbacks to pdflatex or lualatex if requested
   if (${OPT_PDFLATEX})
-    add_pdflatex_command(${BASENAME} "${aux}")
+    set(COMPILER_CMD ${PDFLATEX_COMPILER})
+    set(COMPILER_STR "PDFLaTeX")
+  elseif(${OPT_LUALATEX})
+    set(COMPILER_CMD ${LUALATEX_COMPILER})
+    set(COMPILER_STR "LuaLaTeX")
   else()
-    add_lualatex_command(${BASENAME} "${aux}")
+    set(COMPILER_CMD ${XELATEX_COMPILER})
+    set(COMPILER_STR "XELaTeX")
   endif()
+  add_latex_command(${BASENAME} "${aux}")
 
   # Add the target, either as a dep of the bibliography or unconditionally
   if(${OPT_BIBER})
