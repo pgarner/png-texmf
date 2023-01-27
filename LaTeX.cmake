@@ -9,10 +9,21 @@
 
 # Refs:
 # https://gitlab.kitware.com/cmake/community/-/wikis/FAQ#how-do-i-use-cmake-to-build-latex-documents
+#
+# Notes:
 # http://www.luatex.org/roadmap.html#tbp
+# There are three possible LaTeX engines:
+#  pdflatex is an established standard, and is fast
+#  xelatex adds utf8 and better font support; it is marginally slower
+#  lualatex further adds scripting; it is noticeably slower
+# So here we default to xelatex, being the best compromise between up to date
+# and practical
 
 find_package(LATEX COMPONENTS XELATEX PDFLATEX LUALATEX BIBER)
 
+# The main call to LaTeX, with the actual compiler named in COMPILER_CMD.  The
+# dep on $BASENAME._ (which is never generated) makes the command
+# unconditional; it will always be out of date
 function(add_latex_command BASENAME AUX)
   message(STATUS "Adding ${BASENAME}")
   add_custom_command(
@@ -26,6 +37,10 @@ function(add_latex_command BASENAME AUX)
     )
 endfunction()
 
+# The main call to Biber.  Biber actually looks for the .bcf from LaTeX and
+# generates a .bcf file.  The .bcm is artificial, effectively causing a
+# dependency on differences in the .bcf file according to cmake's
+# copy_if_different
 function(add_biber_command BASENAME)
   message(STATUS "Adding ${BASENAME}.bbl")
   add_custom_command(
@@ -47,10 +62,17 @@ function(add_biber_command BASENAME)
     )
 endfunction()
 
+# The main call from the application's CMakeLists.txt.  Adds a document to be
+# compiled with latex with options:
+#
+#  BIBER: Include a bibliography managed using BibLaTeX
+#  GLOB: Include all .tex files in the directory; this makes `make clean` work
+#  PDFLATEX: Use pdflatex compiler instead of xelatex
+#  LUALATEX: Use lualatex compiler instead of xelatex
 function(add_document BASENAME)
 
   # Options
-  set(options BIBER GLOB PDFLATEX)
+  set(options BIBER GLOB PDFLATEX LUALATEX)
   cmake_parse_arguments(PARSE_ARGV 1 OPT "${options}" "" "")
 
   # Build a list of the auxiliary files
@@ -71,11 +93,11 @@ function(add_document BASENAME)
     set(COMPILER_STR "LuaLaTeX")
   else()
     set(COMPILER_CMD ${XELATEX_COMPILER})
-    set(COMPILER_STR "XELaTeX")
+    set(COMPILER_STR "XeLaTeX")
   endif()
   add_latex_command(${BASENAME} "${aux}")
 
-  # Add the target, either as a dep of the bibliography or unconditionally
+  # Add the target, either as a dep of the bibliography or alone
   if(${OPT_BIBER})
     add_biber_command(${BASENAME})
     add_custom_target(${BASENAME}-bbl ALL DEPENDS
