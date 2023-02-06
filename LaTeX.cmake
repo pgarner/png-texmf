@@ -50,11 +50,11 @@ function(add_bib_command BASENAME)
     ARGS      -E copy_if_different
               ${CMAKE_CURRENT_BINARY_DIR}/${BASENAME}.${BIB_EXT}
 	      ${CMAKE_CURRENT_BINARY_DIR}/${BASENAME}.bcm
-    COMMENT   "Bibliography update check ${BASENAME}"
+    COMMENT   "Diff ${BASENAME}.${BIB_EXT}"
     )
   add_custom_command(
     OUTPUT    ${BASENAME}.bbl
-    DEPENDS   "${CMAKE_CURRENT_BINARY_DIR}/${BASENAME}.bcm"
+    DEPENDS   "${CMAKE_CURRENT_BINARY_DIR}/${BASENAME}.bcm" ${OPT_BIBS}
     COMMAND   ${BIB_CMD}
     ARGS      ${BASENAME}
     BYPRODUCTS ${BASENAME}.blg
@@ -73,8 +73,9 @@ endfunction()
 function(add_document BASENAME)
 
   # Options
-  set(options BIBER BIBTEX GLOB PDFLATEX LUALATEX)
-  cmake_parse_arguments(PARSE_ARGV 1 OPT "${options}" "" "")
+  set(options GLOB PDFLATEX LUALATEX BIBER BIBTEX)
+  set(multiValueArgs BIBS)
+  cmake_parse_arguments(PARSE_ARGV 1 OPT "${options}" "" "${multiValueArgs}")
 
   # Build a list of the auxiliary files
   if (${OPT_GLOB})
