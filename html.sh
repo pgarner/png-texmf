@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-html=$HOME/doc/github.io/_pubs
+html=$HOME/Documents/github.io/_pubs
 
 # Use a relative css path so it works independent of baseurl
 opts=(
